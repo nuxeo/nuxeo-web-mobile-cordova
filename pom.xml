@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.nuxeo</groupId>
+    <artifactId>nuxeo-addons-parent</artifactId>
+    <version>5.7-SNAPSHOT</version>
+  </parent>
+  <groupId>org.nuxeo.ecm.mobile</groupId>
+  <artifactId>nuxeo-web-mobile-cordova-parent</artifactId>
+  <name>nuxeo-web-mobile-cordova-parent</name>
+  <packaging>pom</packaging>
+  <description>Device specific application for nuxeo-web-mobile using Cordova</description>
+
+  <properties>
+    <nuxeo.version>5.7-SNAPSHOT</nuxeo.version>
+    <android.version>2.3.3</android.version>
+    <cordova.version>2.2.0</cordova.version>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>packaging-android</id>
+      <modules>
+        <module>Android</module>
+      </modules>
+    </profile>
+  </profiles>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.android</groupId>
+        <artifactId>android</artifactId>
+        <version>${android.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.cordova</groupId>
+        <artifactId>cordova</artifactId>
+        <version>${cordova.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm.mobile</groupId>
+        <artifactId>nuxeo-web-mobile-cordova-parent</artifactId>
+        <version>${nuxeo.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <repositories>
+    <repository>
+      <id>public</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>public-snapshot</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public-snapshot</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <scm>
+    <connection>scm:git:git://github.com/nuxeo/nuxeo-web-mobile.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:nuxeo/nuxeo-web-mobile.git</developerConnection>
+    <url>https://github.com/nuxeo/nuxeo-web-mobile</url>
+  </scm>
+
+</project>
