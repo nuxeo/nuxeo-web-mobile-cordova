@@ -1,5 +1,8 @@
 *.class
 
+# Project specific
+www/scripts/cordova-current.js
+
 # Package Files #
 *.jar
 *.war
