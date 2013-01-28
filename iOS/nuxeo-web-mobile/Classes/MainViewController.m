@@ -134,7 +134,7 @@
     
     // Add custom JS
     NSURL *baseDirURL = [[NSBundle mainBundle] URLForResource:self.wwwFolderName withExtension:nil];
-    [theWebView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"var cordovaBase = '%@'", baseDirURL.absoluteURL]];
+    [theWebView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"var cordovaBase = '%@';", baseDirURL.absoluteURL]];
     
     [self fileToBeExecutedWith:@"scripts/nuxeo-cordova-wrapper.js" inWebView:theWebView];
     NSLog(@"URL: %@", [theWebView.request.URL absoluteString]);
