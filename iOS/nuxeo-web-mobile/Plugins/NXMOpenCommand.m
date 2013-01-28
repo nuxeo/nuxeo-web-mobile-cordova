@@ -16,17 +16,17 @@
 #pragma mark -
 #pragma mark CordovaCommands methods
 
--(void)openURL:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options; {
-    NSString* url = [arguments objectAtIndex:1 withDefault:@"about:blank"];
+-(void)openURL:(CDVInvokedUrlCommand*)command {
+    NSString* url = [command.arguments objectAtIndex:0 withDefault:@"about:blank"];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [self.webView loadRequest:request];
     [request release];
 }
 
--(void)openServer:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
-    NSString* url = [arguments objectAtIndex:1 withDefault:@"about:blank"];
-    NSString* login = [arguments objectAtIndex:2 withDefault:nil];
-    NSString* password = [arguments objectAtIndex:3 withDefault:nil];
+-(void)openServer:(CDVInvokedUrlCommand*)command {
+    NSString* url = [command.arguments objectAtIndex:0 withDefault:@"about:blank"];
+    NSString* login = [command.arguments objectAtIndex:1 withDefault:nil];
+    NSString* password = [command.arguments objectAtIndex:2 withDefault:nil];
     
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     if (login != nil && password != nil) {
@@ -40,17 +40,19 @@
         [request setURL:[NSURL URLWithString:loginUrl]];
     }
     [self.webView loadRequest:request];
-    [request release];    
+    [request release];
+    
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
--(void)askUser:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+-(void)askUser:(CDVInvokedUrlCommand*)command {
     UIActionSheet* sheet = [[[UIActionSheet alloc] initWithTitle:@"What file do you want to upload?" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil] autorelease];
     [sheet addButtonWithTitle:@"from library"];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [sheet addButtonWithTitle:@"from camera"];
     }
     
-    NSString* fileName = [arguments objectAtIndex:1 withDefault:nil];
+    NSString* fileName = [command.arguments objectAtIndex:0 withDefault:nil];
     if (fileName != nil) {
         [sheet addButtonWithTitle:fileName];
     }
@@ -58,8 +60,8 @@
     [sheet showInView:self.webView];
 }
 
--(void)presentingDocument:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
-    NSString *anUrl = [arguments objectAtIndex:1 withDefault:nil];
+-(void)presentingDocument:(CDVInvokedUrlCommand*)command {
+    NSString *anUrl = [command.arguments objectAtIndex:0 withDefault:nil];
     NSLog(@"passingURL: %@", anUrl);
     NSURL *url = [NSURL fileURLWithPath:anUrl];
     

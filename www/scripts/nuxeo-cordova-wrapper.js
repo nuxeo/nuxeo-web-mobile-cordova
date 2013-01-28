@@ -27,14 +27,14 @@ var NXCordova = function() {
       }
     }
 
-    function callCordova(command, param) {
+    function callCordova(command, param, onSuccessCall, onErrorCall) {
       //Helper method
       var cordovaRef = window.PhoneGap || window.Cordova || window.cordova;
       //cordovaRef.exec(command, param);
       console.log('try to call.')
-      cordovaRef.exec(function() {
+      cordovaRef.exec(onSuccessCall || function() {
         console.log('success')
-      }, function() {
+      }, onErrorCall || function() {
         console.log('error')
       }, command.command, command.method, param)
     }
@@ -113,9 +113,13 @@ var NXCordova = function() {
       },
       openServer: function(url, username, password) {
         $.mobile.showPageLoadingMsg();
-
         var params = [url, username, password];
-        callCordova(Plugins.openServer, params);
+        callCordova(Plugins.openServer, params, function() {
+          setTimeout(function() {
+            $.mobile.hidePageLoadingMsg();
+            alert("Unable to connect on server")
+          }, 5000)
+        });
       },
       logout: function() {
         callCordova(Plugins.openURL, [cordovaBase + "index.html#page_servers_list"]);
