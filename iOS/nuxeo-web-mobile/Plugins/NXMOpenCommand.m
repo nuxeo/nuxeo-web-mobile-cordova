@@ -89,10 +89,10 @@
     //NSLog(@"Button pressed: %d", buttonIndex);
     [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:YES];
     NSString* btnLabel = [actionSheet buttonTitleAtIndex:buttonIndex];
-    if (btnLabel == @"from library") {
+    if ([btnLabel isEqualToString:@"from library"]) {
         [self.webView stringByEvaluatingJavaScriptFromString:@"NXCordova.openLibrary();"];
     }
-    else if (btnLabel == @"from camera") {
+    else if ([btnLabel isEqualToString:@"from camera"]) {
         [self.webView stringByEvaluatingJavaScriptFromString:@"NXCordova.takePicture();"];
     }
     else if (buttonIndex != actionSheet.cancelButtonIndex) {

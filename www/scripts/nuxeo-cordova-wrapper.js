@@ -30,8 +30,6 @@ var NXCordova = function() {
     function callCordova(command, param, onSuccessCall, onErrorCall) {
       //Helper method
       var cordovaRef = window.PhoneGap || window.Cordova || window.cordova;
-      //cordovaRef.exec(command, param);
-      console.log('try to call.')
       cordovaRef.exec(onSuccessCall || function() {
         console.log('success')
       }, onErrorCall || function() {
@@ -213,7 +211,7 @@ var NXCordova = function() {
         navigator.camera.getPicture(_onSuccess, _onFail, {
           quality: 65,
           destinationType: navigator.camera.DestinationType.FILE_URI,
-          sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM
+          sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
         });
       },
       uploadFile: function(filePath) {
@@ -254,7 +252,7 @@ var NXCordova = function() {
           console.log("upload error target " + error.target);
         }, options);
       },
-      handleOpenURL: function(filePath, fileName) {
+      handleOpenURL: function(filePath) {
         if (document.URL.match('^file:')) {
           alert('You should be connected to a server before trying to upload file.');
           return;
@@ -262,7 +260,8 @@ var NXCordova = function() {
 
         // Timeout it to let the application loading.
         setTimeout(function() {
-          //NXCordova.uploadFile(filePath);
+          var splits = filePath.split("/")
+          var fileName = splits[splits.length - 1];
           _ls.setItem(Constants.fileStorageKey, JSON.stringify({
             'filePath': filePath,
             'fileName': fileName
@@ -273,3 +272,5 @@ var NXCordova = function() {
       }
     };
   }();
+
+handleOpenURL = NXCordova.handleOpenURL; //Bind window.handleOpenURL to nxCordova wrapper
