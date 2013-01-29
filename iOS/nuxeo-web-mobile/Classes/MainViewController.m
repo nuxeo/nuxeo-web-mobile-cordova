@@ -138,6 +138,8 @@
     
     [self fileToBeExecutedWith:@"scripts/nuxeo-cordova-wrapper.js" inWebView:theWebView];
     NSLog(@"URL: %@", [theWebView.request.URL absoluteString]);
+    
+    theWebView.scalesPageToFit = YES;
 
     return [super webViewDidFinishLoad:theWebView];
 }
