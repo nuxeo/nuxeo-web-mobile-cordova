@@ -12,6 +12,11 @@
   <properties>
     <nuxeo.version>5.7-SNAPSHOT</nuxeo.version>
     <android.sdk.version>10</android.sdk.version>
+    <!-- Default signing values for development purpose only -->
+    <keystore.path>../nuxeo-dev.jks</keystore.path>
+    <keystore.type>JKS</keystore.type>
+    <keystore.alias>nuxeo-shell-dev</keystore.alias>
+    <keystore.password>nuxeodev</keystore.password>
   </properties>
 
   <scm>
@@ -78,45 +83,39 @@
             <target>1.6</target>
           </configuration>
         </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jarsigner-plugin</artifactId>
-        </plugin>
-        <plugin>
-          <groupId>org.nuxeo.build</groupId>
-          <artifactId>nuxeo-distribution-tools</artifactId>
-          <extensions>true</extensions>
-        </plugin>
       </plugins>
     </pluginManagement>
 
     <sourceDirectory>src</sourceDirectory>
     <plugins>
-
-      <plugin>
-        <groupId>org.nuxeo.build</groupId>
-        <artifactId>nuxeo-distribution-tools</artifactId>
-        <configuration>
-          <buildFiles>
-            <buildFile>${basedir}/assembly.xml</buildFile>
-          </buildFiles>
-        </configuration>
-        <executions>
-          <execution>
-            <id>packaging</id>
-            <goals>
-              <goal>build</goal>
-            </goals>
-            <phase>process-resources</phase>
-          </execution>
-        </executions>
-      </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
       </plugin>
-
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jarsigner-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>signing</id>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+            <phase>package</phase>
+            <inherited>true</inherited>
+            <configuration>
+              <archiveDirectory></archiveDirectory>
+              <includes>
+                <include>target/*.apk</include>
+              </includes>
+              <storetype>${keystore.type}</storetype>
+              <keystore>${keystore.path}</keystore>
+              <alias>${keystore.alias}</alias>
+              <storepass>${keystore.password}</storepass>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>com.jayway.maven.plugins.android.generation2</groupId>
         <artifactId>maven-android-plugin</artifactId>
