@@ -10,6 +10,8 @@ String.prototype.trailingSlash = function() {
 };
 
 function init() {
+  $.mobile.showPageLoadingMsg();
+
   $('#server_profile_form').submit(function(evt) {
     evt.preventDefault();
     return false;
@@ -42,12 +44,15 @@ function init() {
     document.addEventListener("deviceready", function() {
       console.log("Start using Cordova.")
       deviceIsReady = true;
-      initAndGoToHome();
+      setTimeout(function() {
+        initAndGoToHome();
+      }, 1500);
     }, false);
 
     setTimeout(function() {
       if (!deviceIsReady) {
-        console.log("Start using fallback.")
+        $.mobile.hidePageLoadingMsg();
+
         initAndGoToHome();
       }
     }, 500)
@@ -198,14 +203,14 @@ var ServerUtils = function(server) {
       var servers = _ls.getItem(Constant.SERVERS_KEY);
       return servers ? JSON.parse(servers) : null;
     }
-    
+
     function buildDefaultServerList() {
         return [{
           name: "demo.nuxeo.com",
           servername: "http://demo.nuxeo.com",
           login: "Administrator",
           password: "Administrator",
-          contextPath: "/nuxeo"
+          contextpath: "/nuxeo"
         }]
     }
 

@@ -111,6 +111,7 @@ var NXCordova = function() {
       },
       openServer: function(url, username, password) {
         $.mobile.showPageLoadingMsg();
+
         var params = [url, username, password];
         callCordova(Plugins.openServer, params, function() {
           setTimeout(function() {
