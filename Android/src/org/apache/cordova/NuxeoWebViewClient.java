@@ -43,6 +43,8 @@ public class NuxeoWebViewClient extends CordovaWebViewClient {
         injectFiles(url);
         loadJavascript(String.format("var cordovaBase = '%s'", "file://"
                 + NuxeoWebApp.BASE_PATH));
+        
+        view.getSettings().setBuiltInZoomControls(url.contains("restAPI/preview"));
     }
 
     public void addFileToLoad(String file) {
