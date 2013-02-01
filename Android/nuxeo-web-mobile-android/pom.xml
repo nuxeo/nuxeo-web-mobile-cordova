@@ -13,7 +13,7 @@
     <nuxeo.version>5.7-SNAPSHOT</nuxeo.version>
     <android.sdk.version>10</android.sdk.version>
     <!-- Default signing values for development purpose only -->
-    <keystore.path>../nuxeo-dev.jks</keystore.path>
+    <keystore.path>../../nuxeo-dev.jks</keystore.path>
     <keystore.type>JKS</keystore.type>
     <keystore.alias>nuxeo-shell-dev</keystore.alias>
     <keystore.password>nuxeodev</keystore.password>

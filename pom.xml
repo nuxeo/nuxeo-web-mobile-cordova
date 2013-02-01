@@ -21,7 +21,7 @@
     <profile>
       <id>packaging-android</id>
       <modules>
-        <module>Android</module>
+        <module>Android/nuxeo-web-mobile-android</module>
       </modules>
     </profile>
   </profiles>
