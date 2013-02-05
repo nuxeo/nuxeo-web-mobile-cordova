@@ -3,7 +3,7 @@
     <string name="app_name">nuxeo-web-mobile</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_nuxeo_web_app">NuxeoWebApp</string>
+    <string name="title_activity_nuxeo_web_app">Nuxeo</string>
     <string name="from_file">from file</string>
     <string name="from_library">from library</string>
     <string name="upload_select_source">Select upload source</string>

@@ -43,9 +43,13 @@
                 <action android:name="android.intent.action.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.SEND" />
-                
-                <data android:mimeType="*/*" />
-                
+
+                <data android:mimeType="file/*" />
+                <data android:mimeType="media/*" />
+                <data android:mimeType="audio/*" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="image/*" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
