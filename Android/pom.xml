@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.nuxeo.ecm.mobile</groupId>
+    <artifactId>nuxeo-web-mobile-cordova-parent</artifactId>
+    <version>5.7-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>nuxeo-mobile-application-android-parent</artifactId>
+  <name>Nuxeo Web Mobile Application Android Parent</name>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>nuxeo-web-mobile-android</module>
+    <module>nuxeo-web-mobile-test</module>
+  </modules>
+
+  <properties>
+    <android.sdk.version>10</android.sdk.version>
+
+    <!-- Default signing values for development purpose only -->
+    <keystore.path>../../nuxeo-dev.jks</keystore.path>
+    <keystore.type>JKS</keystore.type>
+    <keystore.alias>nuxeo-shell-dev</keystore.alias>
+    <keystore.password>nuxeodev</keystore.password>
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+          <artifactId>android-maven-plugin</artifactId>
+          <version>3.5.0</version>
+          <inherited>true</inherited>
+          <extensions>true</extensions>
+          <configuration>
+            <sdk>
+              <platform>${android.sdk.version}</platform>
+            </sdk>
+            <deleteConflictingFiles>true</deleteConflictingFiles>
+            <undeployBeforeDeploy>true</undeployBeforeDeploy>
+            <!-- <attachSources>true</attachSources> -->
+            <sign>
+              <debug>false</debug>
+            </sign>
+            <zipalign>
+              <verbose>true</verbose>
+              <inputApk>${project.build.directory}/${artifactId}-${version}.apk</inputApk>
+              <outputApk>${project.build.directory}/${artifactId}-signed.apk</outputApk>
+            </zipalign>
+            <extractDuplicates>true</extractDuplicates>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.6</source>
+            <target>1.6</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>

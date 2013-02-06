@@ -30,7 +30,7 @@ public class OpenCommandPlugin extends CordovaPlugin {
 
     protected enum Actions {
         openURL, openServer, presentingDocument, askUser
-    };
+    }
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) {
@@ -170,7 +170,7 @@ public class OpenCommandPlugin extends CordovaPlugin {
      * Android.
      * 
      * @param documentUrl of an existing document.
-     * @param downloadUrl
+     * @param mimetype of the document
      */
     protected Status presentingDocument(String documentUrl, String mimetype) {
         Log.i(TAG, "Try to presenting url: " + documentUrl + " with mimetype: "

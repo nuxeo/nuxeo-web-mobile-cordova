@@ -7,7 +7,7 @@
   </parent>
   <groupId>org.nuxeo.ecm.mobile</groupId>
   <artifactId>nuxeo-web-mobile-cordova-parent</artifactId>
-  <name>nuxeo-web-mobile-cordova-parent</name>
+  <name>Nuxeo Web Mobile Cordova Parent</name>
   <packaging>pom</packaging>
   <description>Device specific application for nuxeo-web-mobile using Cordova</description>
 
@@ -15,24 +15,38 @@
     <nuxeo.version>5.7-SNAPSHOT</nuxeo.version>
     <android.version>2.3.3</android.version>
     <cordova.version>2.2.0</cordova.version>
+    <robotium.version>2.5</robotium.version>
   </properties>
 
   <profiles>
     <profile>
       <id>packaging-android</id>
       <modules>
-        <module>Android/nuxeo-web-mobile-android</module>
+        <module>Android</module>
       </modules>
     </profile>
   </profiles>
 
   <dependencyManagement>
     <dependencies>
+      <!-- Android dependencies -->
       <dependency>
         <groupId>com.google.android</groupId>
         <artifactId>android</artifactId>
         <version>${android.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.google.android</groupId>
+        <artifactId>android-test</artifactId>
+        <version>${android.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.jayway.android.robotium</groupId>
+        <artifactId>robotium-solo</artifactId>
+        <version>${robotium.version}</version>
+      </dependency>
+
+      <!-- Nuxeo Web App - Cordova dependencies -->
       <dependency>
         <groupId>org.apache.cordova</groupId>
         <artifactId>cordova</artifactId>
@@ -42,6 +56,32 @@
         <groupId>org.nuxeo.ecm.mobile</groupId>
         <artifactId>nuxeo-web-mobile-cordova-parent</artifactId>
         <version>${nuxeo.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm.mobile</groupId>
+        <artifactId>nuxeo-web-mobile-android</artifactId>
+        <version>${nuxeo.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm.mobile</groupId>
+        <artifactId>nuxeo-mobile-application-android</artifactId>
+        <version>${nuxeo.version}</version>
+        <type>jar</type>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm.mobile</groupId>
+        <artifactId>nuxeo-mobile-application-android</artifactId>
+        <version>${nuxeo.version}</version>
+        <type>apk</type>
+      </dependency>
+
+      <!-- Nuxeo dependencies -->
+      <dependency>
+        <groupId>org.nuxeo.ecm.distribution</groupId>
+        <artifactId>nuxeo-distribution</artifactId>
+        <version>${nuxeo.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -68,6 +108,32 @@
       </snapshots>
     </repository>
   </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>public</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public</url>
+      <name>Nuxeo virtual release repository</name>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>public-snapshot</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public-snapshot</url>
+      <name>Nuxeo virtual snapshot repository</name>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <updatePolicy>always</updatePolicy>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
   <scm>
     <connection>scm:git:git://github.com/nuxeo/nuxeo-web-mobile.git</connection>

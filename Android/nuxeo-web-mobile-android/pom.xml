@@ -2,28 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.nuxeo.ecm.mobile</groupId>
+    <artifactId>nuxeo-mobile-application-android-parent</artifactId>
+    <version>5.7-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-  <groupId>org.nuxeo.ecm.mobile</groupId>
   <artifactId>nuxeo-mobile-application-android</artifactId>
-  <name>Nuxeo Mobile Application Android</name>
+  <name>Nuxeo Web Mobile Application Android</name>
   <packaging>apk</packaging>
-  <version>5.7-SNAPSHOT</version>
 
   <properties>
     <nuxeo.version>5.7-SNAPSHOT</nuxeo.version>
-    <android.sdk.version>10</android.sdk.version>
-    <!-- Default signing values for development purpose only -->
-    <keystore.path>../../nuxeo-dev.jks</keystore.path>
-    <keystore.type>JKS</keystore.type>
-    <keystore.alias>nuxeo-shell-dev</keystore.alias>
-    <keystore.password>nuxeodev</keystore.password>
   </properties>
-
-  <scm>
-    <connection>scm:git:git://github.com/nuxeo/nuxeo-web-mobile.git</connection>
-    <developerConnection>scm:git:https://github.com/nuxeo/nuxeo-web-mobile.git</developerConnection>
-    <url>https://github.com/nuxeo/nuxeo-web-mobile</url>
-  </scm>
 
   <dependencies>
     <dependency>
@@ -42,8 +34,8 @@
       <dependency>
         <groupId>org.nuxeo.ecm.mobile</groupId>
         <artifactId>nuxeo-web-mobile-cordova-parent</artifactId>
-        <version>${nuxeo.version}</version>
         <scope>import</scope>
+        <version>${nuxeo.version}</version>
         <type>pom</type>
       </dependency>
     </dependencies>
@@ -54,8 +46,7 @@
       <plugins>
         <plugin>
           <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-          <artifactId>maven-android-plugin</artifactId>
-          <version>2.9.0-beta-5</version>
+          <artifactId>android-maven-plugin</artifactId>
           <inherited>true</inherited>
           <extensions>true</extensions>
           <configuration>
@@ -118,7 +109,7 @@
       </plugin>
       <plugin>
         <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-        <artifactId>maven-android-plugin</artifactId>
+        <artifactId>android-maven-plugin</artifactId>
         <executions>
           <execution>
             <id>alignApk</id>
@@ -132,54 +123,4 @@
 
     </plugins>
   </build>
-
-  <repositories>
-    <repository>
-      <id>public</id>
-      <url>http://maven.nuxeo.org/nexus/content/groups/public</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>public-snapshot</id>
-      <url>http://maven.nuxeo.org/nexus/content/groups/public-snapshot</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>public</id>
-      <url>http://maven.nuxeo.org/nexus/content/groups/public</url>
-      <name>Nuxeo virtual release repository</name>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>public-snapshot</id>
-      <url>http://maven.nuxeo.org/nexus/content/groups/public-snapshot</url>
-      <name>Nuxeo virtual snapshot repository</name>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
 </project>
