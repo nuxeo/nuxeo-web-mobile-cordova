@@ -13,10 +13,6 @@
   <name>Nuxeo Web Mobile Application Android Test</name>
   <packaging>apk</packaging>
 
-  <properties>
-    <avd.dir>${basedir}/avd/virtual_2.2.avd</avd.dir>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.nuxeo.ecm.mobile</groupId>
@@ -69,9 +65,12 @@
             <configuration>
               <emulator>
                 <avd>virtual_2.2</avd>
-                <options>-no-snapshot -wipe-data -initdata ${avd.dir}/userdata.img -data ${avd.dir}/userdata-qemu.img -sdcard ${avd.dir}/sdcard.img -cache ${avd.dir}/cache.img</options>
-                <wait>20000</wait>
+                <options>-no-snapshot -wipe-data</options>
+                <wait>240000</wait>
               </emulator>
+              <sdk>
+                <platform>10</platform>
+              </sdk>
             </configuration>
             <executions>
               <execution>

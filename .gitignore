@@ -46,3 +46,6 @@ profile
 DerivedData
 .idea/
 *.hmap
+
+# Android
+gen
