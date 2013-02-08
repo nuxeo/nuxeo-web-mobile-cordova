@@ -68,6 +68,7 @@
                 <options>-no-snapshot -wipe-data</options>
                 <wait>240000</wait>
               </emulator>
+              <emulatorWait>240000</emulatorWait>
               <sdk>
                 <platform>10</platform>
               </sdk>
