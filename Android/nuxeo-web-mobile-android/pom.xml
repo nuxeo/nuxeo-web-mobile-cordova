@@ -13,10 +13,6 @@
   <name>Nuxeo Web Mobile Application Android</name>
   <packaging>apk</packaging>
 
-  <properties>
-    <nuxeo.version>5.7-SNAPSHOT</nuxeo.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.apache.cordova</groupId>
@@ -28,18 +24,6 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.nuxeo.ecm.mobile</groupId>
-        <artifactId>nuxeo-web-mobile-cordova-parent</artifactId>
-        <scope>import</scope>
-        <version>${nuxeo.version}</version>
-        <type>pom</type>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <build>
     <pluginManagement>
@@ -60,10 +44,14 @@
               <debug>false</debug>
             </sign>
             <zipalign>
+              <skip>false</skip>
               <verbose>true</verbose>
               <inputApk>${project.build.directory}/${artifactId}-${version}.apk</inputApk>
               <outputApk>${project.build.directory}/${artifactId}-signed.apk</outputApk>
             </zipalign>
+            <manifest>
+              <manifestVersionCodeUpdateFromVersion>true</manifestVersionCodeUpdateFromVersion>
+            </manifest>
           </configuration>
         </plugin>
         <plugin>
@@ -118,9 +106,30 @@
               <goal>zipalign</goal>
             </goals>
           </execution>
+          <execution>
+            <id>withoutIntentsApk</id>
+            <goals>
+              <goal>apk</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <androidManifestFile>${basedir}/withoutIntents/AndroidManifest.xml</androidManifestFile>
+            </configuration>
+          </execution>
+          <execution>
+            <id>alignWithoutIntentsApk</id>
+            <phase>package</phase>
+            <goals>
+              <goal>zipalign</goal>
+            </goals>
+            <configuration>
+              <zipalign>
+                <outputApk>${project.build.directory}/${artifactId}-signed-withoutIntents.apk</outputApk>
+              </zipalign>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
-
     </plugins>
   </build>
 </project>
