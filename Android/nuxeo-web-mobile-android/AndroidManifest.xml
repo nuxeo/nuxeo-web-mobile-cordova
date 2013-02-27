@@ -33,7 +33,8 @@
         <activity
             android:name=".NuxeoWebApp"
             android:label="@string/title_activity_nuxeo_web_app"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask"
+            android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

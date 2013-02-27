@@ -13,6 +13,7 @@
 
   <properties>
     <nuxeo.version>5.7-SNAPSHOT</nuxeo.version>
+    <nuxeo.distribution.tools.version>1.11.5</nuxeo.distribution.tools.version>
     <android.version>2.3.3</android.version>
     <cordova.version>2.2.0</cordova.version>
     <robotium.version>2.5</robotium.version>
@@ -85,6 +86,20 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <!-- Force version to 1.11.5 while it is not running on maven3 -->
+          <groupId>org.nuxeo.build</groupId>
+          <artifactId>nuxeo-distribution-tools</artifactId>
+          <version>${nuxeo.distribution.tools.version}</version>
+          <extensions>true</extensions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
   <repositories>
     <repository>
