@@ -9,10 +9,6 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array>
-				<string>icon.png</string>
-			</array>
 			<key>CFBundleTypeName</key>
 			<string>Nuxeo</string>
 			<key>CFBundleTypeRole</key>
@@ -27,14 +23,11 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>home_icon_57_57.png</string>
 		<string>home_icon_114_114.png</string>
 		<string>home_icon_72_72.png</string>
-		<string>icon-72@2x.png</string>
 		<string>home_icon_144_144.png</string>
 	</array>
 	<key>CFBundleIcons</key>
@@ -46,13 +39,12 @@
 				<string>home_icon_57_57.png</string>
 				<string>home_icon_114_114.png</string>
 				<string>home_icon_72_72.png</string>
-				<string>icon-72@2x.png</string>
 				<string>home_icon_144_144.png</string>
 			</array>
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>org.nuxeo.nuxeo.web.mobile</string>
+	<string>org.nuxeo.web.mobile</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
