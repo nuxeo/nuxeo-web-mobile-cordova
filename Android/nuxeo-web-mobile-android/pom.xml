@@ -22,6 +22,7 @@
       <id>release</id>
       <properties>
         <isRelease>true</isRelease>
+        <keystore.alias>nuxeo4android</keystore.alias>
       </properties>
     </profile>
     <profile>
