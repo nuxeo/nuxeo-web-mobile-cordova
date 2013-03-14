@@ -13,6 +13,41 @@
   <name>Nuxeo Web Mobile Application Android</name>
   <packaging>apk</packaging>
 
+  <properties>
+    <isRelease>false</isRelease>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <properties>
+        <isRelease>true</isRelease>
+      </properties>
+    </profile>
+    <profile>
+      <id>withoutintents</id>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+              <artifactId>android-maven-plugin</artifactId>
+              <inherited>true</inherited>
+              <extensions>true</extensions>
+              <configuration>
+                <androidManifestFile>${basedir}/withoutIntents/AndroidManifest.xml</androidManifestFile>
+                <zipalign>
+                  <skip>false</skip>
+                  <outputApk>${project.build.directory}/${artifactId}-signed-withoutIntents.apk</outputApk>
+                </zipalign>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.cordova</groupId>
@@ -43,15 +78,14 @@
             <sign>
               <debug>false</debug>
             </sign>
-            <zipalign>
-              <skip>false</skip>
-              <verbose>true</verbose>
-              <inputApk>${project.build.directory}/${artifactId}-${version}.apk</inputApk>
-              <outputApk>${project.build.directory}/${artifactId}-signed.apk</outputApk>
-            </zipalign>
             <manifest>
               <manifestVersionCodeUpdateFromVersion>true</manifestVersionCodeUpdateFromVersion>
             </manifest>
+            <release>${isRelease}</release>
+            <zipalign>
+              <skip>false</skip>
+              <outputApk>${project.build.directory}/${artifactId}-signed.apk</outputApk>
+            </zipalign>
           </configuration>
         </plugin>
         <plugin>
@@ -72,41 +106,6 @@
         <artifactId>maven-compiler-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-        <artifactId>android-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>alignApk</id>
-            <phase>package</phase>
-            <goals>
-              <goal>zipalign</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>withoutIntentsApk</id>
-            <goals>
-              <goal>apk</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <androidManifestFile>${basedir}/withoutIntents/AndroidManifest.xml</androidManifestFile>
-            </configuration>
-          </execution>
-          <execution>
-            <id>alignWithoutIntentsApk</id>
-            <phase>package</phase>
-            <goals>
-              <goal>zipalign</goal>
-            </goals>
-            <configuration>
-              <zipalign>
-                <outputApk>${project.build.directory}/${artifactId}-signed-withoutIntents.apk</outputApk>
-              </zipalign>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jarsigner-plugin</artifactId>
         <executions>
@@ -118,15 +117,25 @@
             <phase>package</phase>
             <inherited>true</inherited>
             <configuration>
-              <archiveDirectory></archiveDirectory>
-              <includes>
-                <include>target/*.apk</include>
-              </includes>
+              <archive>${project.build.directory}/${artifactId}-${version}.apk</archive>
               <storetype>${keystore.type}</storetype>
               <keystore>${keystore.path}</keystore>
               <alias>${keystore.alias}</alias>
               <storepass>${keystore.password}</storepass>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+        <artifactId>android-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>alignApk</id>
+            <phase>package</phase>
+            <goals>
+              <goal>zipalign</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
