@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.nuxeo.ecm.mobile.android"
     android:versionCode="3"
-    android:versionName="1.1" >
+    android:versionName="1.0.2" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -9,6 +9,7 @@
 
     <supports-screens
         android:anyDensity="true"
+        android:xlargeScreens="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:resizeable="true"
