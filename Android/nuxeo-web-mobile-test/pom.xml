@@ -69,9 +69,7 @@
                 <wait>240000</wait>
               </emulator>
               <emulatorWait>240000</emulatorWait>
-              <sdk>
-                <platform>10</platform>
-              </sdk>
+              <device>emulator</device>
             </configuration>
             <executions>
               <execution>
@@ -165,14 +163,30 @@
             <phase>package</phase>
             <inherited>true</inherited>
             <configuration>
-              <archiveDirectory></archiveDirectory>
-              <includes>
-                <include>target/*.apk</include>
-              </includes>
+              <sdk>
+                <platform>${android.sdk.version}</platform>
+              </sdk>
+              <deleteConflictingFiles>true</deleteConflictingFiles>
+              <undeployBeforeDeploy>true</undeployBeforeDeploy>
+              <manifest>
+                <manifestVersionCodeUpdateFromVersion>true</manifestVersionCodeUpdateFromVersion>
+              </manifest>
+              <zipalign>
+                <skip>false</skip>
+                <outputApk>${project.build.directory}/${project.artifactId}-signed.apk</outputApk>
+              </zipalign>
+              <archive>${project.build.directory}/${project.artifactId}-${project.version}.apk</archive>
               <storetype>${keystore.type}</storetype>
               <keystore>${keystore.path}</keystore>
               <alias>${keystore.alias}</alias>
               <storepass>${keystore.password}</storepass>
+              <!-- For compliance with JDK7 -->
+              <arguments>
+                <argument>-digestalg</argument>
+                <argument>SHA1</argument>
+                <argument>-sigalg</argument>
+                <argument>MD5withRSA</argument>
+              </arguments>
             </configuration>
           </execution>
         </executions>
@@ -185,9 +199,9 @@
             <skip>auto</skip>
             <debug>false</debug>
             <coverage>true</coverage>
-            <!--<logonly>false</logonly>-->
+            <!--<logonly>false</logonly> -->
             <!-- <testsize>small|medium|large</testsize> -->
-            <!--<createreport>true</createreport>-->
+            <!--<createreport>true</createreport> -->
             <!-- <classes> -->
             <!-- <class>org.nuxeo.android.automationsample.AllTests</class> -->
             <!-- </classes> -->
