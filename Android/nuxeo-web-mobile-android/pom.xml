@@ -39,7 +39,7 @@
                 <androidManifestFile>${basedir}/withoutIntents/AndroidManifest.xml</androidManifestFile>
                 <zipalign>
                   <skip>false</skip>
-                  <outputApk>${project.build.directory}/${artifactId}-signed-withoutIntents.apk</outputApk>
+                  <outputApk>${project.build.directory}/${project.artifactId}-signed-withoutIntents.apk</outputApk>
                 </zipalign>
               </configuration>
             </plugin>
@@ -85,7 +85,7 @@
             <release>${isRelease}</release>
             <zipalign>
               <skip>false</skip>
-              <outputApk>${project.build.directory}/${artifactId}-signed.apk</outputApk>
+              <outputApk>${project.build.directory}/${project.artifactId}-signed.apk</outputApk>
             </zipalign>
           </configuration>
         </plugin>
@@ -118,7 +118,7 @@
             <phase>package</phase>
             <inherited>true</inherited>
             <configuration>
-              <archive>${project.build.directory}/${artifactId}-${version}.apk</archive>
+              <archive>${project.build.directory}/${project.artifactId}-${project.version}.apk</archive>
               <storetype>${keystore.type}</storetype>
               <keystore>${keystore.path}</keystore>
               <alias>${keystore.alias}</alias>

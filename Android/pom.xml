@@ -49,8 +49,8 @@
             </sign>
             <zipalign>
               <verbose>true</verbose>
-              <inputApk>${project.build.directory}/${artifactId}-${version}.apk</inputApk>
-              <outputApk>${project.build.directory}/${artifactId}-signed.apk</outputApk>
+              <inputApk>${project.build.directory}/${project.artifactId}-${project.version}.apk</inputApk>
+              <outputApk>${project.build.directory}/${project.artifactId}-signed.apk</outputApk>
             </zipalign>
             <extractDuplicates>true</extractDuplicates>
           </configuration>
