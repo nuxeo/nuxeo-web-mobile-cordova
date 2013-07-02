@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.nuxeo</groupId>
     <artifactId>nuxeo-addons-parent</artifactId>
-    <version>5.7-SNAPSHOT</version>
+    <version>5.7.2-SNAPSHOT</version>
   </parent>
   <groupId>org.nuxeo.ecm.mobile</groupId>
   <artifactId>nuxeo-web-mobile-cordova-parent</artifactId>
@@ -12,7 +12,7 @@
   <description>Device specific application for nuxeo-web-mobile using Cordova</description>
 
   <properties>
-    <nuxeo.version>5.7-SNAPSHOT</nuxeo.version>
+    <nuxeo.version>5.7.2-SNAPSHOT</nuxeo.version>
     <nuxeo.distribution.tools.version>1.11.5</nuxeo.distribution.tools.version>
     <android.version>2.3.3</android.version>
     <cordova.version>2.2.0</cordova.version>
