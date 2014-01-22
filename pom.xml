@@ -93,7 +93,7 @@
         <plugin>
           <!-- Force version to 1.11.5 while it is not running on maven3 -->
           <groupId>org.nuxeo.build</groupId>
-          <artifactId>nuxeo-distribution-tools</artifactId>
+          <artifactId>ant-assembly-maven-plugin</artifactId>
           <version>${nuxeo.distribution.tools.version}</version>
           <extensions>true</extensions>
         </plugin>
